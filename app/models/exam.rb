@@ -5,6 +5,7 @@ class Exam
   field :order, type: Integer
   field :description, type: String
   field :time, type: Integer
+  field :points, type: Integer
   field :finish_text, type: String
   belongs_to :category
   has_many :questions
