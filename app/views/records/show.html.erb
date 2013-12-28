@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @record.user %>
+</p>
+
+<p>
+  <b>Exam:</b>
+  <%= @record.exam %>
+</p>
+
+<p>
+  <b>Answers:</b>
+  <%= @record.answers %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @record.time %>
+</p>
+
+<p>
+  <b>Points:</b>
+  <%= @record.points %>
+</p>
+
+<p>
+  <b>Date taken:</b>
+  <%= @record.date_taken %>
+</p>
+
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Back', records_path %>

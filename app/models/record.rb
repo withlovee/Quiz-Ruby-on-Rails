@@ -5,5 +5,5 @@ class Record
   field :answers, type: Array
   field :time, type: Integer
   field :points, type: Integer
-  field :date_taken, type: DateTime
+  field :date_taken, type: DateTime, default: ->{ DateTime.now }
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: MyString
+  exam: MyString
+  answers: MyString
+  time: 1
+  points: 1
+  date_taken: 1
+
+two:
+  user: MyString
+  exam: MyString
+  answers: MyString
+  time: 1
+  points: 1
+  date_taken: 1

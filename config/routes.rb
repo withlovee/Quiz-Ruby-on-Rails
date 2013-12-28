@@ -1,6 +1,10 @@
 Quiz::Application.routes.draw do
+  resources :records
+
+
   resources :exams
   post 'exams/:id', to: 'exams#start'
+  #get 'exams/:id/start', to: 'exams#start'
   resources :categories
   resources :records
 

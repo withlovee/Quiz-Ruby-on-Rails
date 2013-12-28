@@ -11,3 +11,34 @@
  *= require_self
  *= require_tree .
  */
+
+.question-modal .modal-content img{
+	max-width: 100%;
+	height: auto;
+}
+#exam-nav .pagination{
+	margin: 0;
+	li.visited{
+		a{
+			background-color: #f7f7f7;
+		}
+	}
+	li.active{
+		a{
+			color: #ffffff;
+			background-color: #428bca;
+			border-color: #428bca;
+		}
+	}
+}
+.clabel{
+	padding: 0 5px;
+}
+.separatorx{
+	display: none;
+}
+@media screen and (min-width: 900px){
+	.question-modal .modal-dialog {
+		width: 850px;
+	}
+}

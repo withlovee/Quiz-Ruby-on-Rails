@@ -39,4 +39,3 @@ gem 'jquery-rails'
 gem 'mongoid'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.0.3.0'
-gem "friendly_id", "~> 4.0.10"

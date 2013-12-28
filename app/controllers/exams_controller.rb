@@ -1,5 +1,5 @@
 class ExamsController < ApplicationController
-  #before_filter :authenticate_user!, :only => :start
+  before_filter :authenticate_user!, :only => :start
   # GET /exams
   # GET /exams.json
   def index
@@ -25,11 +25,11 @@ class ExamsController < ApplicationController
   # GET /exams/1
   # GET /exams/1.json
   def start
-    unless user_signed_in?
-      #redirect_to new_user_session_path
-    end
     @exam = Exam.find_by(slug: params[:id])
-
+    # @record = Record.new
+    @record = Record.create({user: current_user,
+                             exam: @exam
+                            })
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @exam }
