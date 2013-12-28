@@ -1,11 +1,12 @@
 Quiz::Application.routes.draw do
+  resources :exams
+  post 'exams/:id', to: 'exams#start'
   resources :categories
+  resources :records
 
 
   devise_for :users
-
-  resources :tests
-  root :to => "tests#index"
+  root :to => "exams#index"
 
 
   # The priority is based upon order of creation:

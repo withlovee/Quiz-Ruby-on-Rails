@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @exam.name %>
+</p>
+
+<p>
+  <b>Slug:</b>
+  <%= @exam.slug %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%= @exam.order %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @exam.description %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @exam.time %>
+</p>
+
+<p>
+  <b>Finish text:</b>
+  <%= @exam.finish_text %>
+</p>
+<% @exam.questions.order_by(:order => :asc).each do |question| %>
+  <div class="question">
+    <!--img src="<%= asset_path @exam.slug+'/'+question.content+'.png' %>" alt=""-->
+    <%= asset_path @exam.slug+'/'+question.content+'.png' %>
+    <% if question.type == 'choice' %>
+    <select class="ans" name="<%= question.order %>" id="<%= question.order %>">
+      <option value=""></option>
+      <% question.choices.each do |choice| %>
+        <option value="<%= choice %>">ข้อ <%= choice %></option>
+      <% end %>
+    </select>
+    <% end %>
+    <% if question.type == 'text' %>
+      <input class="ans" type="text" name="<%= question.order %>" id="<%= question.order %>">
+    <% end %>
+  </div>
+<% end %>
+<input type="submit" value="ส่งคำตอบ">
+<script>
+answers = [];
+function update(){
+  console.log(answers);
+}
+function add(order, ans){
+  answers[order] = ans;
+}
+$(function(){
+  $('.ans').change(function(e){
+    console.log($(this).attr('name')+" "+$(this).val());
+    add($(this).attr('name'),$(this).val());
+    update();
+  });
+});
+</script>
+<%= link_to 'Edit', edit_exam_path(@exam) %> |
+<%= link_to 'Back', exams_path %>

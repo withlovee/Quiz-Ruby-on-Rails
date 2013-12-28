@@ -4,5 +4,8 @@ class Category
   field :slug, type: String
   field :order, type: Integer
   field :description, type: String
-  has_many :tests
+  has_many :exams
+  def to_param
+    self.slug
+  end
 end
