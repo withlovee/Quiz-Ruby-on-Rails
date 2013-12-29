@@ -8,7 +8,31 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 cat = Category.create({name: "PAT3 ความถนัดทางวิศวกรรมศาสตร์", slug: "engineering", order: 1, description: ""})
-a = Exam.create({name: "Semi-final Test", slug: "fe6-semi-final", points: 300, order: 1, description: "คำอธิบาย", time: 180, finish_text: "จบแบ้ว เย่ๆ", category: cat})
+a = Exam.create({
+	name: "Semi-final Test", 
+	slug: "fe6-semi-final", 
+	points: 300, 
+	order: 1, 
+	description: '<h4 class="text-center"><strong>ทดลองสอบ PAT3</strong></h4>
+<p>ข้อสอบชุดนี้เป็นข้อสอบ Semi-finalTest โครงการแนะแนวความถนัดทางวิศวกรรมสู่น้อง ม.ปลาย ครั้งที่ 6 (fecamp 6)  ซึ่งออกโดยนิสิตคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย (4 ตุลาคม 2555) ลักษณะข้อสอบจะมีลักษณะที่ออกคล้ายคลึง PAT3 เพื่อให้น้องๆ ได้ทดลองทำข้อสอบก่อนลงสนามสอบจริง</p>
+<p><strong>คำชี้แจงในการทำข้อสอบ</strong></p>
+<ol>
+<li>ข้อสอบมีสองส่วนรวม 70 ข้อ 300 คะแนน<br>
+- ส่วนแรกเป็นแบบปรนัยทั้งหมด 60 ข้อ ข้อละ 4 คะแนน รวม 240 คะแนน<br>
+- ส่วนที่สองเป็นแบบอัตนัยทั้งหมด 10 ข้อ ข้อละ 6 คะแนน รวม 60 คะแนน</li>
+<li>คำตอบที่เป็นอัตนัย ให้ตอบ<strong>โดยมีทศนิยม 2 ตำแหน่งเสมอ</strong> เช่น 0.16 หรือ 9.57 หรือ 14.00 หรือ 1900.00 (หลักพันขึ้นไปไม่ต้องใส่ comma ",") หากคำตอบเป็นจำนวนเต็มแต่ไม่ใส่ทศนิยมจะไม่ได้คะแนน</li>
+<li>หลังจากสอบเสร็จน้องๆ สามารถ Download โจทย์และเฉลยไปทบทวนได้</li>
+</ol>
+<p class="text-center"><strong>ค่าคงที่</strong><br>หากมิได้กำหนดเป็นอย่างอื่น ให้ใช้ค่าต่อไปนี้ในการคำนวณ<br>
+<img src="http://www.clipvidva.com/wp-content/uploads/2012/10/ccc.png" alt="ค่าคงที่" />
+</p>
+<p class="text-center">แบบทดสอบนี้เหมาะสำหรับคนตั้งใจเพื่อมาฝึกฝนจริงๆ (เพราะมีการจับเวลาด้วย)  หากผู้สอบจำคำตอบมาจะไม่ได้ประโยชน์ใดๆ เลย</p>
+<p class="text-center">ขอขอบคุณ <a href="http://fecampchula.net/">FECamp จุดเริ่มต้นอันอบอุ่นที่ดีที่สุดของวิศวกร</a><br>คลิกปุ่มด้านล่างเพื่อทำข้อสอบ</p>', 
+time: 180, 
+finish_text: "", 
+pdf_solution: 'clipvidva-fecamp-solution.pdf',
+pdf_question: 'clipvidva-fecamp-question.pdf',
+category: cat})
 c = ['1','2','3','4','5']
 Question.create({exam: a, type: 'choice', choices: c, description: '', order: '1', content: '01', answer: '4', point: 4})
 Question.create({exam: a, type: 'choice', choices: c, description: '', order: '2', content: '02', answer: '2', point: 4})
@@ -71,12 +95,12 @@ Question.create({exam: a, type: 'choice', choices: c, description: '', order: '5
 Question.create({exam: a, type: 'choice', choices: c, description: '', order: '59', content: '59', answer: '3', point: 4})
 Question.create({exam: a, type: 'choice', choices: c, description: '', order: '60', content: '60', answer: '5', point: 4})
 Question.create({exam: a, type: 'text', description: '', order: '61', content: '61', answer: '6.17', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '62', content: '62', answer: '5', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '63', content: '63', answer: '500', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '64', content: '64', answer: '627', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '65', content: '65', answer: '260', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '66', content: '66', answer: '1800', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '67', content: '67', answer: '1024', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '68', content: '68', answer: '3', point: 6})
-Question.create({exam: a, type: 'text', description: '', order: '69', content: '69', answer: '6', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '62', content: '62', answer: '5.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '63', content: '63', answer: '500.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '64', content: '64', answer: '627.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '65', content: '65', answer: '260.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '66', content: '66', answer: '1800.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '67', content: '67', answer: '1024.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '68', content: '68', answer: '3.00', point: 6})
+Question.create({exam: a, type: 'text', description: '', order: '69', content: '69', answer: '6.00', point: 6})
 Question.create({exam: a, type: 'text', description: '', order: '70', content: '70', answer: '0.94', point: 6})

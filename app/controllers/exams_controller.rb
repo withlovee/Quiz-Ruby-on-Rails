@@ -49,9 +49,9 @@ class ExamsController < ApplicationController
   # end
 
   # GET /exams/1/edit
-  def edit
-    @exam = Exam.find_by(slug: params[:id])
-  end
+  # def edit
+  #   @exam = Exam.find_by(slug: params[:id])
+  # end
 
   # POST /exams
   # POST /exams.json
@@ -71,19 +71,19 @@ class ExamsController < ApplicationController
 
   # PUT /exams/1
   # PUT /exams/1.json
-  def update
-    @exam = Exam.find_by(slug: params[:id])
+  # def update
+  #   @exam = Exam.find_by(slug: params[:id])
 
-    respond_to do |format|
-      if @exam.update_attributes(params[:exam])
-        format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @exam.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @exam.update_attributes(params[:exam])
+  #       format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: "edit" }
+  #       format.json { render json: @exam.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /exams/1
   # DELETE /exams/1.json
