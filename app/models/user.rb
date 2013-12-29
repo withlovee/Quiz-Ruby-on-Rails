@@ -6,12 +6,18 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :firstname, :lastname, :year, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :firstname, :lastname, :display_name, :year, :school, :password_confirmation, :remember_me
 
   field :firstname,              :type => String, :default => ""
   field :lastname,               :type => String, :default => ""
+  field :display_name,               :type => String, :default => ""
   field :year,                   :type => String, :default => ""
   field :school,                   :type => String, :default => ""
+  
+  validates :display_name,
+  :uniqueness => {
+    :case_sensitive => false
+  }
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""

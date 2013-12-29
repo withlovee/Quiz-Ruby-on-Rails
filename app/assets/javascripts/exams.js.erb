@@ -1,0 +1,84 @@
+answers = [];
+function init(){
+  for(i=1; i<=questionsNum; i++){
+    answers[i] = '';
+  }
+}
+function add(order, ans){
+  answers[order] = ans;
+}
+function update(questionID, value){
+    console.log(questionID+" "+value);
+    add(questionID,value);
+    if(value != ''){
+      $('#pq'+questionID).parent('li').addClass('active');
+    }
+    else{
+      $('#pq'+questionID).parent('li').removeClass('active');
+      $('#pq'+questionID).parent('li').addClass('visited');
+    }
+}
+function preview(){
+  str = '';
+  for(i=1; i<=questionsNum; i++){
+    if(answers[i] != null && answers[i] != ''){
+      str += '<li>'+answers[i]+'</li>';
+    }
+    else{
+      str += '<li class="text-error">ยังไม่ได้ตอบ</li>';
+    }
+  }
+  $('#preview .modal-body ul').html(str);
+}
+function submit(){
+  minutes_left = $('.hh-1').text()*60 + parseInt($('.mm-1').text()+$('.mm-2').text());
+  time_used = time - minutes_left;
+  $.ajax({
+    type: "PUT",
+    url: "/records/" + record_id + ".json?&authenticity_token=" + AUTH_TOKEN,
+    data: {
+      record: {
+        answers: answers,
+        time: time_used
+      }
+    }
+  }).done(function(msg){
+    $(location).attr('pathname','/records/'+msg.id);
+  }).fail(function(){
+    alert("เกิดปัญหาขึ้น ให้น้องส่งคำตอบที่น้องตอบมาที่ vibhavee.t@clipvidva.com เพื่อให้ทีมงานตรวจสอบ");
+  });
+}
+$(function(){
+  init();
+  $('.ans').change(function(e){
+    questionID = $(this).attr('name');
+    value = $(this).val();
+    update(questionID, value);
+  });
+  $('#preview-btn').click(function(e){
+    preview();
+  });
+  $('#exam-nav .pagination a').click(function(e){
+    e.preventDefault();
+    $(this).parent('li').addClass('visited');
+    id = $(this).attr('href');
+  });
+  $('.question-modal .btn').click(function(e){
+    id = '#pq'+$(this).data('question');
+    console.log(id);
+    $(id).parent('li').addClass('visited');
+  });
+  $('#countdown').countDown({
+    label_hh:         'ชั่วโมง',
+    label_mm:         'นาที',
+    label_ss:         'วินาที',
+    separator:        ' '
+  });
+  $('#countdown').on('time.elapsed', function () {
+      submit();
+  });
+  $('#final-submit').click(function(e){
+    e.preventDefault();
+    submit();
+  });
+});

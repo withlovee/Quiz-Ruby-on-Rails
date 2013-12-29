@@ -1,0 +1,381 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap.min
+ *= require bootstrap-responsive.min
+ *= require font-awesome.min
+ *= require_self
+ * require_tree .
+ */
+ @font-face {
+	font-family: 'rsu';
+	src: font-url('rsu_bold.eot');
+	src: font-url('rsu_bold.eot?#iefix') format('embedded-opentype'),
+		 font-url('rsu_bold.woff') format('woff'),
+		 font-url('rsu_bold.ttf') format('truetype'),
+		 font-url('rsu_bold.svg#rsubold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'rsu';
+	src: font-url('rsu_regular.eot');
+	src: font-url('rsu_regular.eot?#iefix') format('embedded-opentype'),
+		 font-url('rsu_regular.woff') format('woff'),
+		 font-url('rsu_regular.ttf') format('truetype'),
+		 font-url('rsu_regular.svg#rsuregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+
+}
+body{
+	margin: 0;
+	font-size: 15px;
+	line-height: 25px;
+	color: #4d4d4d;
+	background: image-url('bg.png') 0 0 repeat;
+}
+h1{
+	font-family: 'rsu', Tahoma, sans-serif;
+	font-size: 43px;
+	margin: 10px 0;
+	font-weight: 600;
+}
+h2{
+	font-family: 'rsu', Tahoma, sans-serif;
+	font-size: 34px;
+	font-weight: 600;
+}
+h3{
+	font-family: 'rsu', Tahoma, sans-serif;
+	font-size: 26px;
+	font-weight: 600;
+	line-height: 33px;
+}
+h1,h2,h3{
+	line-height: 1em;
+}
+.question-modal{
+	.modal-content img{
+		max-width: 100%;
+		height: auto;
+	}
+	.modal-footer{
+		text-align: center;
+	}
+	.input-append{
+		margin: 5px auto;
+	}
+	.close{
+		font-size: 35px;
+		position: absolute;
+		bottom: 25px;
+		right: 20px;
+		z-index: 2;
+	}
+}
+.btn-primary{
+	border: 1px solid #005daa;
+}
+.btn{
+	border: 1px solid #e6e6e6;
+}
+li {
+	line-height: 25px;
+}
+#preview{
+	ul{
+		list-style-type: decimal;
+		margin-left: 40px;
+	}
+}
+#exam-sidebar{
+	border-radius: 5px;
+	background-color: #f1f1f1;
+	padding: 3px 0 10px 0;
+	border: 1px solid #ddd;
+	h3, h4, p{
+		padding: 0 15px;
+	}
+	h4{
+		margin-bottom: 0;
+	}
+}
+#answers-table{
+	.icon-ok{
+		color: green;
+	}
+	.icon-remove{
+		color: red;
+	}
+}
+#exam-nav .pagination{
+	margin: 0;
+	li.visited{
+		a{
+			background-color: #f7f7f7;
+		}
+	}
+	li.active{
+		a{
+			color: #ffffff;
+			background-color: #428bca;
+			border-color: #428bca;
+		}
+	}
+}
+.clabel{
+	padding: 0 5px;
+}
+
+#header{
+	width: 100%;
+	background-color: #fff;
+	padding: 5px 0;
+	-webkit-box-shadow:  0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+	box-shadow:  0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+	.container{
+		/*background-color: rgba(255,255,255,0.95);
+		-webkit-border-radius: 0 0 2px 2px;
+		-moz-border-radius: 0 0 2px 2px;
+		border-radius: 0 0 2px 2px;*/
+		/*margin-top: 25px;*/
+	}
+	.socials{
+		float: right;
+		ul{
+			padding: 8px 0;
+		}
+		li{
+			padding: 0 4px;
+		}
+		div[class="tooltip-inner"] {
+			width: 250px;
+		}
+	}
+	.logo{
+		float: left;
+		margin: 7px 20px 6px 5px;
+	}
+	.nav-collapse{
+		float: left;
+		margin: 0;
+	}
+	.dropdown-menu{
+		li{
+			float: none;
+			padding: 0;
+		}
+		a{
+			font-family: Tahoma;
+			font-size: 15px;
+			font-weight: normal;
+			padding: 6px 15px;
+		}
+		a:hover{
+			background: none;
+			background-color: #ddd;
+			color: #000;
+		}
+	}
+	ul{
+		list-style-type: none;
+		margin: 0;
+		padding: 8px 0;
+	}
+	li{
+		float: left;
+		padding: 6px 14px 3px 14px;
+		position: relative;
+		i{
+			font-size: 14px;
+		}
+	}
+	li.open>a{
+		color: #ed0004;
+		background-color: transparent;
+	}
+	a{
+		font-family: 'rsu', Tahoma, sans-serif;
+		font-weight: 600;
+		font-size: 22px;
+		line-height: 1.2em;
+		color: #888;
+	}
+	a:focus {
+		outline: 0;
+		background-color: transparent;
+	}
+	a:hover{
+		color: #ed0004;
+		text-decoration: none;
+	}
+	li a:hover{
+		background-color: transparent;
+	}
+	.btn-navbar{
+		margin: 5px 10px;
+	}
+	.btn-navbar i{
+		font-size: 13px;
+		vertical-align: middle;
+	}
+	.search{
+		float: right;
+		margin: 10px 10px;
+	}
+}
+#error_explanation{
+	margin: -20px 0 30px 0;
+	padding: 10px 20px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #c09853;
+}
+.form-error{
+	color: #E75252;
+	margin: 0!important;
+}
+html{
+	height: 100%;
+}
+.clear{
+	clear: both;
+}
+body{
+	position: relative;
+	min-height: 100%;
+}
+#footer{
+	margin-top: 30px;
+	background-color: #2f2f2f;
+	padding: 7px 0;
+	font-size: 13px;
+	color: #fff;
+	a{
+		color: #fff;
+	}
+	a:hover{
+		color: #ccc;
+	}
+}
+.visible-phone2{
+	display: none;
+}
+@media (max-width: 990px){
+	.visible-phone2{
+		display: block;
+	}
+}
+@media (max-width: 1200px) and (min-width: 978px) {
+	#header{
+		.search{
+			.span2{
+				width: 80px;
+			}
+		}
+	}
+	#header .nav-collapse{
+		li{
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+}
+@media (min-width: 768px) and (max-width: 979px) {
+	.logo{
+		margin-right: 10px;
+	}
+	#header .nav-collapse{
+		height: auto;
+		float: none;
+	}
+	#header{
+		.search{
+			.span2{
+				width: 180px;
+			}
+		}
+	}
+}
+@media (min-width: 768px){
+	#footer{
+		bottom: 0;
+		width: 100%;
+		position: absolute;
+	}	
+}
+@media (max-width: 767px){
+	#header{
+		text-align: left;
+		.nav,ul{
+			float: none;
+		}
+		.nav li{
+			float: none;
+		}
+		.nav li a{
+			padding: 5px 10px!important;
+		}
+
+		&.navbar-fixed-top{
+			margin-left: 0!important;
+			.container{
+				width: auto!important;
+			}
+		}
+	}
+	#footer{
+		padding: 10px 20px;
+	}
+}
+@media screen and (min-width: 900px){
+	.question-modal.modal {
+		width: 850px;
+		margin-left: -425px;
+		.modal-body{
+			width: 810px;
+		}
+		.modal-header {
+			padding: 9px 15px 0 15px;
+			border-bottom: 0;
+		}
+	}
+}
+@media (max-width: 430px) {
+#header{
+	text-align: center;
+}
+	#header{
+		.logo, .socials{
+			float: none;
+			margin: 0 auto;
+		}
+		.nav{
+			text-align: left;
+		}
+		.socials{
+			li{
+				display: inline-block;
+				float: none;
+			}
+		}
+	}
+	#header .nav{
+		li{
+			float: none;
+			padding: 0 15px;
+		}
+	}
+}

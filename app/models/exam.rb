@@ -6,7 +6,8 @@ class Exam
   field :description, type: String
   field :time, type: Integer
   field :points, type: Integer
-  field :finish_text, type: String
+  field :pdf_question, type: String
+  field :pdf_solution, type: String
   belongs_to :category
   has_many :questions
   def to_param

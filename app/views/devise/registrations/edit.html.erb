@@ -1,41 +1,55 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<h2>แก้ไขข้อมูลส่วนตัว</h2>
+&nbsp;
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div><%= f.label :firstname %><br />
-  <%= f.text_field :firstname, :autofocus => true %></div>
-
-  <div><%= f.label :lastname %><br />
-  <%= f.text_field :lastname, :autofocus => true %></div>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.label :school %><br />
-  <%= f.text_field :school, :autofocus => true %></div>
-
-  <div><%= f.label :year %><br />
-  <%= f.select :year, options_for_select(['', 'ม.4', 'ม.5', 'ม.6', 'ม.6', 'อื่นๆ'],resource.year) %></div>
-
+  <div class="control-group">
+    <%= f.label(:firstname, "ชื่อจริง", class: 'control-label') %>
+    <div class="controls"><%= f.text_field :firstname, :data => { :validation => 'required' } %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:lastname, "นามสกุล", class: 'control-label') %>
+    <div class="controls"><%= f.text_field :lastname, :data => { :validation => 'required' } %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:display_name, "ชื่อที่ใช้ในเว็บ", class: 'control-label') %>
+    <div class="controls"><%= f.text_field :display_name, :data => { :validation => 'length', 'validation-length' => 'min3' } %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:email, "อีเมล", class: 'control-label') %>
+    <div class="controls"><%= f.email_field :email, :data => { :validation => 'email' } %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:school, "โรงเรียน/สถาบัน", class: 'control-label') %>
+    <div class="controls"><%= f.text_field :school, :data => { :validation => 'required' } %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:year, "ระดับชั้น", class: 'control-label') %>
+    <div class="controls"><%= f.select :year, options_for_select(['ประถม','มัธยมต้น','ม.4 / ปวช.1', 'ม.5 / ปวช.2', 'ม.6 / ปวช.3', 'มหาวิทยาลัย','อื่นๆ'],resource.year), { :include_blank=>true }, {:data => { :validation => 'required' }} %></div>
+  </div>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <div class="control-group">
+    <label class="control-label" for="user[waiting]">Currently waiting confirmation for</label>
+    <div class="controls"><%= resource.unconfirmed_email %></div>
+  </div>
   <% end %>
-
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update" %></div>
+  <div class="control-group">
+    <%= f.label(:current_password, "รหัสผ่านปัจจุบัน", class: 'control-label') %>
+    <div class="controls"><%= f.password_field :current_password, :data => { :validation => 'required' } %><br>ใส่รหัสผ่านเดิมเพื่อยืนยันการแก้ไข</div>
+  </div>
+  <h3>เปลี่ยนรหัสผ่าน</h3>
+  <div class="control-group">
+    <%= f.label(:password, "ใส่รหัสผ่านใหม่", class: 'control-label') %>
+    <div class="controls"><%= f.password_field :password, :autocomplete => "off" %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:password_confirmation, "ใส่รหัสผ่านใหม่อีกครั้ง", class: 'control-label') %>
+    <div class="controls"><%= f.password_field :password_confirmation %></div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit "แก้ไขข้อมูล", class: 'btn btn-primary'  %>
+    </div>
+  </div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-
-<%= link_to "Back", :back %>
+<%#= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>
+<%= render "devise/validation" %>

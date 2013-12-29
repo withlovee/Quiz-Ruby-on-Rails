@@ -382,7 +382,9 @@
             // Set the css class of the <time> element.
             this.time_element.addClass(this.options.css_class);
         }
-
+        , getMS: function() {
+            return this.end_date.getTime() - new Date().getTime();
+        }
         , doCountDown: function () {
             // Calculate the difference between the two dates in milliseconds.
             // Note: in iOS JavaScript is paused during elastic scroll and not resumed until the scrolling stops.
@@ -401,9 +403,9 @@
             }
             // Update display.
             this.displayRemainingTime({
-                  'ss': ss < 10 ? '0' + ss.toString() : ss.toString()
-                , 'mm': mm < 10 ? '0' + mm.toString() : mm.toString()
-                , 'hh': hh < 10 ? '0' + hh.toString() : hh.toString()
+                  'ss': ss.toString()
+                , 'mm': mm.toString()
+                , 'hh': hh.toString()
                 , 'dd': dd.toString()
             });
             // If seconds are hidden, stop the counter as soon as there is no minute left.

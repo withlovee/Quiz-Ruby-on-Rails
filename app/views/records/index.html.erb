@@ -1,33 +1,32 @@
-<h1>Listing records</h1>
-
-<table>
+<h1>ประวัติการสอบ</h1>
+<table class="table">
   <tr>
-    <th>User</th>
-    <th>Exam</th>
-    <th>Answers</th>
-    <th>Time</th>
-    <th>Points</th>
-    <th>Date taken</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>ชุดข้อสอบ</th>
+    <th>คะแนนที่ได้</th>
+    <th>เวลาที่ใช้</th>
+    <th>วันที่</th>
+    <th>ดูคำตอบ</th>
   </tr>
 
 <% @records.each do |record| %>
   <tr>
-    <td><%= record.user.email %></td>
-    <td><%= record.exam.name %></td>
-    <td><%= record.answers %></td>
-    <td><%= record.time %></td>
-    <td><%= record.points %></td>
-    <td><%= record.date_taken %></td>
-    <td><%= link_to 'Show', record %></td>
-    <td><%= link_to 'Edit', edit_record_path(record) %></td>
-    <td><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to record.exam.name, exam_path(record.exam) %></td>
+    <td>
+      <% if record.points %>
+      <%= record.points %>
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td>
+      <% if record.time %>
+      <%= record.time %> นาที
+      <% else %>
+      ทำไม่เสร็จ
+      <% end %>
+    </td>
+    <td><%= record.date_taken.strftime('%d-%m-%Y, %H:%M น.') %></td>
+    <td><a href="<%= record_path(record) %>" title="ดูคำตอบ"><i class="icon-folder-open"></i></a></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Record', new_record_path %>

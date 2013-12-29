@@ -1,72 +1,56 @@
-<div class="row">
-  <div class="col-md-6">
-    <h1><%= @exam.name %></h1>
-    <h3><%= @exam.category.name %></h3>
-    <h3>
-      เหลือเวลาอีก <time id="countdown" datetime="P180M">180 นาที</time>
-    </h3>
-    <p>
-      คลิกเลขข้อด้านขวามือเพื่ออ่านโจทย์และใส่คำตอบ<br>
-      เมื่อทำข้อสอบเสร็จหมดแล้ว ให้กดปุ่ม "ส่งคำตอบ" ที่อยู่ด้านล่าง<br>
-      ระบบจะส่งคำตอบให้อัตโนมัติหากหมดเวลาแล้วแต่ยังไม่ได้ส่งคำตอบ
-    </p>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" id="preview-btn" data-target="#preview">
-      ส่งคำตอบ
-    </button>
-  </div>
-  <div class="col-md-6">
-    <div id="exam-nav">
-      <ul class="pagination">
-        <% @exam.questions.each.with_index(1) do |elem, i| %>
-          <li><a data-toggle="modal" data-target="#q<%= i %>" id="pq<%= i %>" href="#q<%= i %>"><%= i %></a></li>
-          <% if i%10 == 0 %>
-          </ul>
-          <br>
-          <ul class="pagination">
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div><!--col-->
-</div><!--row-->
+<h1><%= @exam.name %></h1>
+<h3><%= @exam.category.name %></h3>
+<h3>
+  เหลือเวลาอีก <time id="countdown" datetime="P<%= @exam.time %>M"><%= @exam.time %> นาที</time>
+</h3>
 <p>
-  <b>Finish text:</b>
-  <%= @exam.finish_text %>
+  คลิกเลขข้อด้านล่างเพื่ออ่านคำถามและเลือกคำตอบ<br>
+  เมื่อทำข้อสอบเสร็จหมดแล้ว ให้กดปุ่ม "ส่งคำตอบ" ที่อยู่ด้านล่าง<br>
+  ระบบจะส่งคำตอบให้อัตโนมัติหากหมดเวลาแล้วแต่ยังไม่ได้ส่งคำตอบ
 </p>
+<div id="exam-nav">
+  <div class="pagination">
+  <ul>
+    <% @exam.questions.each.with_index(1) do |elem, i| %>
+      <li><a data-toggle="modal" data-target="#q<%= i %>" id="pq<%= i %>" href="#q<%= i %>"><%= i %></a></li>
+      <% if i%10 == 0 %>
+      </ul>
+      </div>
+      <div class="pagination">
+      <ul>
+      <% end %>
+    <% end %>
+  </ul>
+  </div>
+</div><!--exam-nav-->
+<button class="btn btn-large btn-primary" data-toggle="modal" id="preview-btn" data-target="#preview">
+  ส่งคำตอบ
+</button>
 <% @exam.questions.order_by(:order => :asc).each do |question| %>
 <!-- Modal -->
-<div class="modal fade question-modal" id="q<%= question.order %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header"></div>
-      <div class="modal-body">
-        <img src="<%= asset_path @exam.slug+'/'+question.content+'.png' %>" alt="">
-      </div>
-      <div class="modal-footer">
-          <div class="row">
-            <div class="col-lg-6  col-lg-offset-3">
-              <div class="input-group">
-                <% if question.type == 'choice' %>
-                <select class="ans input-lg form-control" name="<%= question.order %>" id="<%= question.order %>">
-                  <option value="">เลือกคำตอบ</option>
-                  <% question.choices.each do |choice| %>
-                    <option value="<%= choice %>">ข้อ <%= choice %></option>
-                  <% end %>
-                </select>
-                <% end %>
-                <% if question.type == 'text' %>
-                <input class="ans input-lg form-control" type="text" name="<%= question.order %>" id="<%= question.order %>" placeholder="ใส่คำตอบ">
-                <% end %>
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" data-question="<%= question.order %>">ตอบ</button>
-                </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-          </div><!-- /.row -->
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<div class="modal hide fade question-modal" id="q<%= question.order %>">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <div class="modal-body">
+    <img src="<%= asset_path @exam.slug+'/'+question.content+'.png' %>" alt="">
+  </div>
+  <div class="modal-footer">
+    <div class="input-append">
+          <% if question.type == 'choice' %>
+          <select class="ans" name="<%= question.order %>" id="<%= question.order %>">
+            <option value="">เลือกคำตอบ</option>
+            <% question.choices.each do |choice| %>
+              <option value="<%= choice %>">ข้อ <%= choice %></option>
+            <% end %>
+          </select>
+          <% end %>
+          <% if question.type == 'text' %>
+          <input class="ans" type="text" name="<%= question.order %>" id="<%= question.order %>" placeholder="ใส่คำตอบ">
+          <% end %>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-question="<%= question.order %>">ตอบ</button>
+    </div><!--input-append-->
+  </div><!--modal-footer-->
+</div><!--modal-->
+
 <% end %>
 
 <!-- Modal -->
@@ -84,71 +68,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">กลับไปแก้ไข</button>
-        <button type="button" class="btn btn-primary" id="final-submit">ส่งคำตอบ</button>
+        <button type="submit" class="btn btn-primary" id="final-submit">ส่งคำตอบ</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
-answers = [];
+AUTH_TOKEN = '<%= form_authenticity_token %>';
 record_id = '<%= @record._id %>';
 time = <%= @exam.time %>;
 questionsNum = <%= @exam.questions.count %>;
-function add(order, ans){
-  answers[order] = ans;
-}
-function update(questionID, value){
-    console.log(questionID+" "+value);
-    add(questionID,value);
-    if(value != ''){
-      $('#pq'+questionID).parent('li').addClass('active');
-    }
-    else{
-      $('#pq'+questionID).parent('li').removeClass('active');
-      $('#pq'+questionID).parent('li').addClass('visited');
-    }
-}
-function preview(){
-  str = '';
-  for(i=1; i<=questionsNum; i++){
-    if(answers[i] != null && answers[i] != ''){
-      str += '<li>'+answers[i]+'</li>';
-    }
-    else{
-      str += '<li>ยังไม่ได้ตอบ</li>';
-    }
-  }
-  $('#preview .modal-body ul').html(str);
-}
-$(function(){
-  $('.ans').change(function(e){
-    questionID = $(this).attr('name');
-    value = $(this).val();
-    update(questionID, value);
-  });
-  $('#preview-btn').click(function(e){
-    preview();
-  });
-  $('#exam-nav .pagination a').click(function(e){
-    e.preventDefault();
-    $(this).parent('li').addClass('visited');
-    id = $(this).attr('href');
-  });
-  $('.question-modal .btn').click(function(e){
-    id = '#pq'+$(this).data('question');
-    console.log(id);
-    $(id).parent('li').addClass('visited');
-  });
-  $('#countdown').countDown({
-    label_hh:         'ชั่วโมง',
-    label_mm:         'นาที',
-    label_ss:         'วินาที',
-    separator:        ' '
-
-  });
-  $('#countdown').on('time.elapsed', function () {
-      // do something...
-  });
-});
 </script>
-
+<%= javascript_include_tag "exams" %>

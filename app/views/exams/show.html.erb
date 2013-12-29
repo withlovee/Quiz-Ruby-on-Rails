@@ -3,28 +3,18 @@
 <h3><%= @exam.category.name %></h3>
 <h3>เวลา: <%= @exam.time %> นาที
 </h3>
-<p>
-  <b>Description:</b>
-  <%= @exam.description %>
-</p>
+<%= raw @exam.description %>
 
-  <%= form_tag(exam_path(@exam), method: 'post') do %>
-  <p class="text-center">
-    <input type="submit" class="btn btn-primary btn-lg" value="เริ่มทำข้อสอบ">
-  </p>
-  <% end %>
 <% if user_signed_in? %>
   <%= form_tag(exam_path(@exam), method: 'post') do %>
   <p class="text-center">
-    <input type="submit" class="btn btn-primary btn-lg" value="เริ่มทำข้อสอบ">
+    <input type="submit" class="btn btn-large btn-primary" value="เริ่มทำข้อสอบ">
   </p>
   <% end %>
 <% else %>
   <%= form_tag(new_user_session_path, method: 'get') do %>
   <p class="text-center">
-    <input type="submit" class="btn btn-primary btn-lg" value="ล็อกอินเพื่อทำข้อสอบ">
+    <input type="submit" class="btn btn-large btn-primary" value="ล็อกอินเพื่อทำข้อสอบ">
   </p>
   <% end %>
 <% end %>
-<%= link_to 'Edit', edit_exam_path(@exam) %> |
-<%= link_to 'Back', exams_path %>

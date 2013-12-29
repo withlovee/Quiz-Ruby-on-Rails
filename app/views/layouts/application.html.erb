@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quiz</title>
+  <title>QuizVidva</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <link rel="stylesheet/less" type="text/css" href="http://www.clipvidva.com/wp-content/themes/clipvidva2/css/style.less" />
-  <script src="http://www.clipvidva.com/wp-content/themes/clipvidva2/js/less.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="header">
@@ -22,7 +20,7 @@
 <li><a href="" title="" data-toggle="modal" data-target="#search-box" data-original-title="ค้นหาคลิปและเอกสารต่างๆ ภายในเว็บไซต์"><img src="http://www.clipvidva.com/wp-content/themes/clipvidva2/img/icon_search.png" alt=""></a></li>
 </ul>
 </div>
-<div class="clear visible-phone"></div>
+<div class="clear visible-phone2"></div>
 <a class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
 เมนู <i class="icon-chevron-down"></i>
 </a>
@@ -56,35 +54,48 @@
 </div><!--nav-->
 </div><!--container-->
 </div>
-<p>
-	<a href="<%= categories_path %>">Categories</a>
-  <a href="<%= exams_path %>">Exams</a>
-	<a href="<%= records_path %>">Records</a>
-</p>
-<ul class="nav">
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Logout '+current_user.email, destroy_user_session_path, :method=>'delete' %>
-    </li>
-  <% else %>
-    <li>
-    <%= link_to 'Login', new_user_session_path %>
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li>
-    <%= link_to 'Edit account', edit_user_registration_path %>
-    </li>
-  <% else %>
-    <li>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    </li>
-  <% end %>
-</ul>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<br>
 <div class="container">
-<%= yield %>
-</div>
+<% if notice %>
+<p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+<p class="alert"><%= alert %></p>
+<% end %>
+<div class="row-fluid">
+  <div class="span8">
+    <%= yield %>
+  </div>
+  <div class="span4">
+    <div id="exam-sidebar">
+      <h4>QuizVidva</h4>
+      <ul class="nav nav-list">
+        <li class="nav-header">ClipVidva's Exam Simulation</li>
+        <%= nav_link 'เริ่มทำข้อสอบ', exams_path %>
+        <%= nav_link 'ดูประวัติการสอบ', records_path %>
+        <% if user_signed_in? %>
+          <%= nav_link 'แก้ไขข้อมูลส่วนตัว', edit_user_registration_path %>
+          <li><%= link_to 'ออกจากระบบ '+current_user.email, destroy_user_session_path, :method=>'delete' %></li>
+        <% else %>
+          <%= nav_link 'สมัครสมาชิกเพื่อทำข้อสอบ', new_user_registration_path %>
+          <%= nav_link 'เข้าสู่ระบบ', new_user_session_path %>
+        <% end %>
+      </ul> 
+    </div><!--exam-sidebar-->
+  </div>
+</div><!--row-->
+</div><!--container-->
+<br><br>
+<div id="footer">
+    <div class="container">
+      <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons (CC BY-NC-ND 3.0)</a> ⋅ 
+      <a href="http://www.facebook.com/clipvidva">facebook</a> ⋅
+      <a href="http://www.twitter.com/clipvidva">twitter</a> ⋅
+      <a href="http://www.youtube.com/clipvidva">youtube</a> ⋅
+      <a href="http://www.clipvidva.com/about/">about us</a> ⋅ 
+      <a href="mailto:contact@clipvidva.com">contact us</a> ⋅ 
+      <a href="http://www.fecampchula.net">fecampchula.net</a> 
+    </div>
+  </div>
 </body>
 </html>
