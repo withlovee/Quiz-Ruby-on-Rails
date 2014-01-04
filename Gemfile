@@ -39,3 +39,5 @@ gem 'jquery-rails'
 gem 'mongoid'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.0.3.0'
+
+gem 'newrelic_rpm'
