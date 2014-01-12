@@ -48,9 +48,25 @@ class ExamsController < ApplicationController
   #   end
   # end
 
-  # GET /exams/1/edit
+  # # GET /exams/1/edit
   # def edit
   #   @exam = Exam.find_by(slug: params[:id])
+  # end
+
+  # # PUT /exams/1
+  # # PUT /exams/1.json
+  # def update
+  #   @exam = Exam.find_by(slug: params[:id])
+
+  #   respond_to do |format|
+  #     if @exam.update_attributes(params[:exam])
+  #       format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: "edit" }
+  #       format.json { render json: @exam.errors, status: :unprocessable_entity }
+  #     end
+  #   end
   # end
 
   # POST /exams
@@ -64,22 +80,6 @@ class ExamsController < ApplicationController
   #       format.json { render json: @exam, status: :created, location: @exam }
   #     else
   #       format.html { render action: "new" }
-  #       format.json { render json: @exam.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # PUT /exams/1
-  # PUT /exams/1.json
-  # def update
-  #   @exam = Exam.find_by(slug: params[:id])
-
-  #   respond_to do |format|
-  #     if @exam.update_attributes(params[:exam])
-  #       format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: "edit" }
   #       format.json { render json: @exam.errors, status: :unprocessable_entity }
   #     end
   #   end
