@@ -8,6 +8,12 @@ Quiz::Application.routes.draw do
   resources :categories
   resources :records
 
+  namespace :admin do
+    resources :exams
+    resources :records
+    resources :users
+  end
+
 
   devise_for :users
   root :to => "exams#index"

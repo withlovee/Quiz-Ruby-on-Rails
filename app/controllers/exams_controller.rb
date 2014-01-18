@@ -29,7 +29,8 @@ class ExamsController < ApplicationController
     @exam = Exam.find_by(slug: params[:id])
     # @record = Record.new
     @record = Record.create({user: current_user,
-                             exam: @exam
+                             exam: @exam,
+                             ip_address: request.remote_ip
                             })
     respond_to do |format|
       format.html # show.html.erb

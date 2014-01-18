@@ -1,0 +1,22 @@
+<h1>ผู้ใช้</h1>
+<table class="table">
+  <tr>
+    <th>ชื่อผู้ใช้</th>
+    <th>ชื่อ นามสกุล</th>
+    <th>อีเมล</th>
+    <th>โรงเรียน</th>
+    <th>ชั้นปี</th>
+    <th>จำนวนครั้ง</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.display_name, admin_user_path(user) %></td>
+    <td><%= user.firstname+" "+user.lastname %></td>
+    <td><%= user.email %></td>
+    <td><%= user.school %></td>
+    <td><%= user.year %></td>
+    <td><%= user.records.count %></td>
+  </tr>
+<% end %>
+</table>

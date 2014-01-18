@@ -1,0 +1,73 @@
+<h1>ดูข้อมูลของ <%= @user.display_name %></h1>
+<table class="table">
+  <tr>
+    <td>ชื่อผู้ใช้</td>
+    <td><%= @user.display_name %></td>
+  </tr>
+  <tr>
+    <td>ชื่อ นามสกุล</td>
+    <td><%= @user.firstname+" "+@user.lastname %></td>
+  </tr>
+  <tr>
+    <td>อีเมล</td>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <td>โรงเรียน</td>
+    <td><%= @user.school %></td>
+  </tr>
+  <tr>
+    <td>ชั้นปี</td>
+    <td><%= @user.year %></td>
+  </tr>
+  <tr>
+    <td>ล็อกอินครั้งสุดท้าย</td>
+    <td><%= @user.last_sign_in_at %></td>
+  </tr>
+  <tr>
+    <td>Current Sign-in IP</td>
+    <td><%= @user.current_sign_in_ip %></td>
+  </tr>
+  <tr>
+    <td>Last Sign-in IP</td>
+    <td><%= @user.last_sign_in_ip %></td>
+  </tr>
+  <tr>
+    <td>ทำแบบทดสอบไปทั้งหมด</td>
+    <td><%= @user.records.count %></td>
+  </tr>
+</table>
+
+<h2>ประวัติการสอบ</h2>
+<table class="table">
+  <tr>
+    <th>ชุดข้อสอบ</th>
+    <th>คะแนนที่ได้</th>
+    <th>เวลาที่ใช้</th>
+    <th>วันที่</th>
+    <th>ดูคำตอบ</th>
+  </tr>
+
+<% @user.records.each do |record| %>
+  <tr>
+    <td><%= link_to record.exam.name, exam_path(record.exam) %></td>
+    <td>
+      <% if record.points %>
+      <%= record.points %>
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td>
+      <% if record.time %>
+      <%= record.time %> นาที
+      <% else %>
+      ทำไม่เสร็จ
+      <% end %>
+    </td>
+    <td><%= record.date_taken.strftime('%d-%m-%Y, %H:%M น.') %></td>
+    <td><a href="<%= admin_record_path(record) %>" title="ดูคำตอบ"><i class="icon-folder-open"></i></a></td>
+  </tr>
+<% end %>
+</table>
+<p><%= link_to 'ดูผู้ใช้คนอื่นๆ', admin_users_path %> | <%= link_to 'ดูประวัติการสอบ', admin_records_path %></p>

@@ -1,4 +1,4 @@
-<%= form_for(@exam) do |f| %>
+<%= form_for([:admin, @exam]) do |f| %>
   <% if @exam.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
@@ -12,28 +12,36 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :slug %><br />
+    <%= f.label :category %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {:prompt => 'เลือกหมวดหมู่'}) %>
+  </div>
+  <div class="field">
+    <%= f.label :slug %>
     <%= f.text_field :slug %>
   </div>
   <div class="field">
-    <%= f.label :order %><br />
+    <%= f.label :order %>
     <%= f.number_field :order %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.label :description %>
+    <%= f.text_area :description, col: 10, style: 'width: 100%' %>
   </div>
   <div class="field">
-    <%= f.label :time %><br />
+    <%= f.label :time %>
     <%= f.number_field :time %>
   </div>
   <div class="field">
-    <%= f.label :finish_text %><br />
-    <%= f.text_area :finish_text %>
+    <%= f.label :pdf_question %>
+    <%= f.text_field :pdf_question %>
+  </div>
+  <div class="field">
+    <%= f.label :pdf_solution %>
+    <%= f.text_field :pdf_solution %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,0 +1,24 @@
+<h1>เลือกชุดข้อสอบ</h1>
+<p><%= link_to 'เพิ่มข้อสอบ', new_admin_exam_path %></p>
+<% @exams.each do |exam| %>
+<div class="well">
+  <div class="row-fluid">
+    <div class="span8">
+      <h3><a href="<%= exam_path(exam) %>"><%= exam.name %></a></h3>
+      <p>
+        <% if exam.category %>
+        <%= exam.category.name %>
+        <% end %><br>
+        <%= link_to 'แก้ไข', edit_admin_exam_path(exam) %> | <%= link_to 'ลบ', exam, :method => :delete, :data => { :confirm => 'แน่ใจว่าต้องการลบ?' } %>
+      </p>
+    </div>
+    <div class="span4">
+        <p>
+          เวลาที่ใช้: <%= exam.time %> นาที<br>
+          จำนวนข้อ: <%= exam.questions.count %> ข้อ<br>
+          คะแนนเต็ม: <%= exam.points %> คะแนน
+        </p>
+    </div>
+  </div>
+</div>
+<% end %>

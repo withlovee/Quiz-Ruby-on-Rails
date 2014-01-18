@@ -1,0 +1,82 @@
+<h1><%= @exam.name %></h1>
+<h3><%= @exam.category.name %></h3>
+<h3>
+  เหลือเวลาอีก <time id="countdown" datetime="P<%= @exam.time %>M"><%= @exam.time %> นาที</time>
+</h3>
+<p>
+  คลิกเลขข้อด้านล่างเพื่ออ่านคำถามและเลือกคำตอบ<br>
+  เมื่อทำข้อสอบเสร็จหมดแล้ว ให้กดปุ่ม "ส่งคำตอบ" ที่อยู่ด้านล่าง<br>
+  ระบบจะส่งคำตอบให้อัตโนมัติหากหมดเวลาแล้วแต่ยังไม่ได้ส่งคำตอบ
+</p>
+<div id="exam-nav">
+  <div class="pagination">
+  <ul>
+    <% @exam.questions.each.with_index(1) do |elem, i| %>
+      <li><a data-toggle="modal" data-target="#q<%= i %>" id="pq<%= i %>" href="#q<%= i %>"><%= i %></a></li>
+      <% if i%10 == 0 %>
+      </ul>
+      </div>
+      <div class="pagination">
+      <ul>
+      <% end %>
+    <% end %>
+  </ul>
+  </div>
+</div><!--exam-nav-->
+<button class="btn btn-large btn-primary" data-toggle="modal" id="preview-btn" data-target="#preview">
+  ส่งคำตอบ
+</button>
+<% @exam.questions.order_by(:order => :asc).each do |question| %>
+<!-- Modal -->
+<div class="modal hide fade question-modal" id="q<%= question.order %>">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  <div class="modal-body">
+    <img src="<%= asset_path @exam.slug+'/'+question.content+'.png' %>" alt="">
+  </div>
+  <div class="modal-footer">
+    <div class="input-append">
+          <% if question.type == 'choice' %>
+          <select class="ans" name="<%= question.order %>" id="<%= question.order %>">
+            <option value="">เลือกคำตอบ</option>
+            <% question.choices.each do |choice| %>
+              <option value="<%= choice %>">ข้อ <%= choice %></option>
+            <% end %>
+          </select>
+          <% end %>
+          <% if question.type == 'text' %>
+          <input class="ans" type="text" name="<%= question.order %>" id="<%= question.order %>" placeholder="ใส่คำตอบ">
+          <% end %>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" data-question="<%= question.order %>">ตอบ</button>
+    </div><!--input-append-->
+  </div><!--modal-footer-->
+</div><!--modal-->
+
+<% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">ตรวจสอบคำตอบก่อนส่ง</h4>
+      </div>
+      <div class="modal-body">
+        <ul>
+          
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">กลับไปแก้ไข</button>
+        <button type="submit" class="btn btn-primary" id="final-submit">ส่งคำตอบ</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+AUTH_TOKEN = '<%= form_authenticity_token %>';
+record_id = '<%= @record._id %>';
+time = <%= @exam.time %>;
+questionsNum = <%= @exam.questions.count %>;
+</script>
+<%= javascript_include_tag "exams" %>

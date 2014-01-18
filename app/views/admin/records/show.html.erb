@@ -1,0 +1,79 @@
+<h2>ประวัติการสอบ</h2>
+
+<p>
+  <b>ข้อสอบ:</b>
+  <%= link_to @record.exam.name, exam_path(@record.exam) %>
+</p>
+
+<p>
+  <b>วันที่ทำการทดสอบ:</b>
+  <%= @record.date_taken.strftime('%d-%m-%Y, %H:%M น.') %>
+</p>
+
+<p>
+  <b>ผู้ใช้:</b>
+  <%= @record.user.display_name %>
+  (<%= @record.ip_address %>)
+</p>
+
+<p>
+  <b>เวลาที่ใช้:</b>
+  <% if @record.time %>
+  <%= @record.time %> นาที
+  <% else %>
+  ทำไม่เสร็จ
+  <% end %>
+</p>
+
+<p>
+  <b>คะแนนที่ได้:</b>
+  <% if @record.points %>
+  <span class="text-success"><%= @record.points %> คะแนน</span>
+  <% else %>
+  -
+  <% end %>
+</p>
+
+<% if @record.done %>
+<p>
+  <b>โจทย์และเฉลย:</b>
+  <%= link_to 'โจทย์', asset_path(@record.exam.slug+'/'+@record.exam.pdf_question) %>, <%= link_to 'เฉลย', asset_path(@record.exam.slug+'/'+@record.exam.pdf_solution) %>
+  <%#= raw @record.exam.finish_text %>
+</p>
+<% end %>
+
+<p>
+  <b>คำตอบ:</b>
+</p>
+<table class="table table-hover table-condensed" id="answers-table">
+  <tr>
+    <th>ข้อ</th>
+    <td>คำตอบ</td>
+    <td>เฉลย</td>
+    <td>คะแนนที่ได้</td>
+  </tr>
+  <% if @record.answers %>
+    <% @record.answers.drop(1).to_enum.with_index(1).each do |answer,i| %>
+    <tr>
+      <th><%= i %>.</th>
+      <td>
+        <%= answer %>
+      </td>
+      <td>
+        <% if @record.results[i] %>
+          <i class="icon-ok"></i>
+        <% else %>
+          <i class="icon-remove"></i>
+        <% end %>
+      </td>
+      <td>
+        <% if @record.results[i] %>
+          <%= @questions[i-1].point %>
+        <% else %>
+          0
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>

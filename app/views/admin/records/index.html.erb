@@ -1,0 +1,34 @@
+<h1>ประวัติการสอบ</h1>
+<table class="table">
+  <tr>
+    <th>ชุดข้อสอบ</th>
+    <th>ผู้ใช้</th>
+    <th>คะแนนที่ได้</th>
+    <th>เวลาที่ใช้</th>
+    <th>วันที่</th>
+    <th>ดูคำตอบ</th>
+  </tr>
+
+<% @records.each do |record| %>
+  <tr>
+    <td><%= link_to record.exam.name, exam_path(record.exam) %></td>
+    <td><%= link_to record.user.display_name, admin_user_path(record.user) %></td>
+    <td>
+      <% if record.points %>
+      <%= record.points %>
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td>
+      <% if record.time %>
+      <%= record.time %> นาที
+      <% else %>
+      ทำไม่เสร็จ
+      <% end %>
+    </td>
+    <td><%= record.date_taken.strftime('%d-%m-%Y, %H:%M น.') %></td>
+    <td><a href="<%= admin_record_path(record) %>" title="ดูคำตอบ"><i class="icon-folder-open"></i></a></td>
+  </tr>
+<% end %>
+</table>

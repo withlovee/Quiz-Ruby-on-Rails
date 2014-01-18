@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QuizVidva</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="header">
+<div class="container">
+<div class="logo">
+<a href="http://www.clipvidva.com"><img src="http://www.clipvidva.com/wp-content/themes/clipvidva2/img/img_logo.png" alt=""></a>
+</div><!--logo-->
+<div class="socials">
+<ul>
+<li><a href="http://www.facebook.com/clipvidva" title="" data-original-title="กดไลค์เพื่อติดตามข่าวสารจากทางเว็บไซต์"><img src="http://www.clipvidva.com/wp-content/themes/clipvidva2/img/icon_fb.png" alt=""></a></li>
+<li><a href="http://www.twitter.com/clipvidva" title="" data-original-title="follow รับข่าวสารล่าสุด"><img src="http://www.clipvidva.com/wp-content/themes/clipvidva2/img/icon_twitter.png" alt=""></a></li>
+<li><a href="http://www.youtube.com/clipvidva" title="" data-original-title="กด subscribe เพื่อดูคลิปล่าสุดเป็นคนแรก"><img src="http://www.clipvidva.com/wp-content/themes/clipvidva2/img/icon_youtube.png" alt=""></a></li>
+<li><a href="" title="" data-toggle="modal" data-target="#search-box" data-original-title="ค้นหาคลิปและเอกสารต่างๆ ภายในเว็บไซต์"><img src="http://www.clipvidva.com/wp-content/themes/clipvidva2/img/icon_search.png" alt=""></a></li>
+</ul>
+</div>
+<div class="clear visible-phone2"></div>
+<a class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
+เมนู <i class="icon-chevron-down"></i>
+</a>
+<div class="nav-collapse collapse">
+<ul class="nav">
+<li>
+<a class="dropdown-toggle" data-toggle="dropdown" href="http://www.clipvidva.com/subjects/">คลิป <i class="icon-caret-down"></i></a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="คลิป">
+<li><a href="http://www.clipvidva.com/subjects/hsmaths/"><i class="icon-list-alt"></i> คณิตศาสตร์ ม.ปลาย</a></li>
+<li><a href="http://www.clipvidva.com/subjects/hsphysics/"><i class="icon-cog"></i> ฟิสิกส์ ม.ปลาย</a></li>
+<li><a href="http://www.clipvidva.com/subjects/physics1/"><i class="icon-plane"></i> ฟิสิกส์ระดับมหาวิทยาลัย 1</a></li>
+<li><a href="http://www.clipvidva.com/subjects/physics2/"><i class="icon-magnet"></i> ฟิสิกส์ระดับมหาวิทยาลัย 2</a></li>
+<li><a href="http://www.clipvidva.com/subjects/askeng/"><i class="icon-comment"></i> ถามวิศวะ</a></li>
+<li><a href="http://www.clipvidva.com/subjects/"><i class="icon-folder-open"></i> ดูคลิปทั้งหมด</a></li>
+</ul>
+</li>
+<li><a href="http://www.clipvidva.com/news/">ข่าว/บทความ</a></li>
+<li>
+<a class="dropdown-toggle" data-toggle="dropdown" href="http://www.clipvidva.com/sheets/">เอกสาร <i class="icon-caret-down"></i></a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="เอกสาร">
+<li><a href="http://www.clipvidva.com/calculus1-solutions/"><i class="icon-list"></i> เฉลยแบบฝึกหัด Calculus 1</a></li>
+<li><a href="http://www.clipvidva.com/calculus2-solutions/"><i class="icon-list"></i> เฉลยแบบฝึกหัด Calculus 2</a></li>
+<li><a href="http://www.clipvidva.com/linear-algebra-pdf/"><i class="icon-file"></i> Linear Algebra ระดับมหาวิทยาลัย</a></li>
+<li><a href="http://www.clipvidva.com/sheets/"><i class="icon-folder-open"></i> ดูเอกสารทั้งหมด</a></li>
+</ul>
+</li>
+<li><a href="http://www.clipvidva.com/forums/">เว็บบอร์ด</a></li>
+<li><a href="http://www.clipvidva.com/about/">เกี่ยวกับเรา</a></li>
+<li><a href="http://www.clipvidva.com/faq/">FAQ</a></li>
+</ul>
+</div><!--nav-->
+</div><!--container-->
+</div>
+<br>
+<div class="container">
+<% if notice %>
+<p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+<p class="alert"><%= alert %></p>
+<% end %>
+<div class="row-fluid">
+  <div class="span8">
+    <%= yield %>
+  </div>
+  <div class="span4">
+    <div id="exam-sidebar">
+      <h4>Admin::QuizVidva</h4>
+      <ul class="nav nav-list">
+        <li class="nav-header">ClipVidva's Exam Simulation</li>
+        <%= nav_link 'แก้ไขข้อสอบ', admin_exams_path %>
+        <%= nav_link 'ประวัติการสอบ', admin_records_path %>
+        <%= nav_link 'ผู้ใช้', admin_users_path %>
+      </ul> 
+    </div><!--exam-sidebar-->
+  </div>
+</div><!--row-->
+</div><!--container-->
+<br><br>
+<div id="footer">
+    <div class="container">
+      <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons (CC BY-NC-ND 3.0)</a> ⋅ 
+      <a href="http://www.facebook.com/clipvidva">facebook</a> ⋅
+      <a href="http://www.twitter.com/clipvidva">twitter</a> ⋅
+      <a href="http://www.youtube.com/clipvidva">youtube</a> ⋅
+      <a href="http://www.clipvidva.com/about/">about us</a> ⋅ 
+      <a href="mailto:contact@clipvidva.com">contact us</a> ⋅ 
+      <a href="http://www.fecampchula.net">fecampchula.net</a> 
+    </div>
+  </div>
+</body>
+</html>
